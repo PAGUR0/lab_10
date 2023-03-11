@@ -1,16 +1,18 @@
 package com.company;
 
+import java.util.Scanner;
+
 abstract class human{
     String full_name;
     String data;
-    int salary;
+    String salary;
     abstract void printName();
     abstract void printData();
     abstract void printSalary();
 }
 
 class direct extends human{
-    direct(String full_name, String data, int salary){
+    direct(String full_name, String data, String salary){
         this.full_name = full_name;
         this.data = data;
         this.salary = salary;
@@ -34,7 +36,7 @@ class direct extends human{
 
 
 class head extends human{
-    head(String full_name, String data, int salary){
+    head(String full_name, String data, String salary){
         this.full_name = full_name;
         this.data = data;
         this.salary = salary;
@@ -57,7 +59,7 @@ class head extends human{
 }
 
 class worker extends human {
-    worker(String full_name, String data, int salary) {
+    worker(String full_name, String data, String salary) {
         this.full_name = full_name;
         this.data = data;
         this.salary = salary;
@@ -81,9 +83,29 @@ class worker extends human {
 
 public class Main {
 
+    static String[] input(){
+        Scanner in = new Scanner(System.in);
+        String[] arr = new String[3];
+        arr[0] = in.next();
+        arr[1] = in.next();
+        arr[2] = in.next();
+        return arr;
+    }
+
     public static void main(String[] args) {
-        direct ivan = new direct("Косаев Иван Васильевич", "29.03.2006", 500000);
-        head denis = new head("Денис Амитров Дмитриевич", "16.01.2005", 50000);
-        worker dasha = new worker("Полуэктова Дарья Сергеевна", "31.03.2005", 5000);
+        Scanner in = new Scanner(System.in);
+        String[] arr = input();
+        human[] workers = new human[3];
+        workers[0] = new direct(arr[0], arr[1], arr[2]);
+        arr = input();
+        workers[1] = new head(arr[0], arr[1], arr[2]);
+        arr = input();
+        workers[2] = new worker(arr[0], arr[1], arr[2]);
+        for (human worker : workers) {
+            worker.printData();
+            worker.printName();
+            worker.printSalary();
+        }
+
     }
 }
